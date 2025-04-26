@@ -1,0 +1,1 @@
+docker build -t registry.cn-beijing.aliyuncs.com/bussanq/framepack .
