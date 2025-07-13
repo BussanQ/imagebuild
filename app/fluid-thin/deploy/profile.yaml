@@ -1,0 +1,14 @@
+apiVersion: data.fluid.io/v1alpha1
+kind: ThinRuntimeProfile
+metadata:
+  name: seaweed-profile
+spec:
+  fileSystemType: fuse
+  fuse:
+    image: registry.cn-beijing.aliyuncs.com/bqai/bqmount
+    imageTag: v1
+    imagePullPolicy: IfNotPresent
+    command:
+      - sh
+      - -c
+      - "bqmount && chmod u+x ./mount.sh && ./mount.sh"

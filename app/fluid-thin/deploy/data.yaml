@@ -1,0 +1,28 @@
+apiVersion: data.fluid.io/v1alpha1
+kind: Dataset
+metadata:
+  name: bqfs
+spec:
+  mounts:
+    - mountPoint: s3://buckets/pvc-68ec0faa-69eb-46f8-9bdf-98c775ab0e71
+      name: bqfs
+      options:
+        url: seaweedfs-filer.seaweedfs:8888
+#      encryptOptions:
+#        - name: accessKey
+#          valueFrom:
+#            secretKeyRef:
+#              name: data-secret
+#              key: accessKey
+#        - name: accessSecret
+#          valueFrom:
+#            secretKeyRef:
+#              name: data-secret
+#              key: accessSecret
+---
+apiVersion: data.fluid.io/v1alpha1
+kind: ThinRuntime
+metadata:
+  name: bqfs
+spec:
+  profileName: seaweed-profile
