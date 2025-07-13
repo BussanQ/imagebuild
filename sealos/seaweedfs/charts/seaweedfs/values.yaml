@@ -98,7 +98,7 @@ master:
   data:
     type: "hostPath"
     storageClass: ""
-    hostPathPrefix: /ssd
+    hostPathPrefix: /kwdata
 
   # You may use ANY storage-class, example with local-path-provisioner
   # Annotations are optional.
@@ -116,7 +116,7 @@ master:
     type: "hostPath"
     size: ""
     storageClass: ""
-    hostPathPrefix: /storage
+    hostPathPrefix: /kwdata
 
   ## @param master.sidecars Add additional sidecar containers to the master pod(s)
   ## e.g:
@@ -319,7 +319,7 @@ volume:
   dataDirs:
   - name: data1
     type: "hostPath"
-    hostPathPrefix: /ssd
+    hostPathPrefix: /kwdata
     maxVolumes: 0
 
    # - name: data2
@@ -337,7 +337,7 @@ volume:
   #
   # idx:
   #  type: "hostPath"
-  #  hostPathPrefix: /ssd
+  #  hostPathPrefix: /kwdata
   #
   # or
   #
@@ -590,7 +590,7 @@ filer:
     type: "hostPath"
     size: ""
     storageClass: ""
-    hostPathPrefix: /storage
+    hostPathPrefix: /kwdata
 
   # You may use ANY storage-class, example with local-path-provisioner
   # Annotations are optional.
@@ -608,7 +608,7 @@ filer:
     type: "hostPath"
     size: ""
     storageClass: ""
-    hostPathPrefix: /storage
+    hostPathPrefix: /kwdata
 
   ## @param filer.sidecars Add additional sidecar containers to the filer pod(s)
   ## e.g:
@@ -910,7 +910,7 @@ s3:
     type: "hostPath"
     size: ""
     storageClass: ""
-    hostPathPrefix: /storage
+    hostPathPrefix: /kwdata
 
   extraEnvironmentVars:
 
