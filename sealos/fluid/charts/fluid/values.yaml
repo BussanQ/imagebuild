@@ -25,7 +25,7 @@ crdUpgrade:
   imageTag: *defaultVersion
 
 ##  if unspecified, will use built-in variable `.Release.Namespace`.
-namespace: fluid-system
+namespace: fluid
 
 dataset:
   replicas: 1

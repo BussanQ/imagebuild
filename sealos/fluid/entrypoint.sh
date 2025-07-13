@@ -5,7 +5,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1
 
 NAME=${NAME:-"fluid"}
 NAMESPACE=${NAMESPACE:-"fluid"}
-CHARTS="./charts/fluid-1.0.5.tgz"
+CHARTS="./charts/fluid"
 HELM_OPTS=${HELM_OPTS:-""}
 
 function install(){

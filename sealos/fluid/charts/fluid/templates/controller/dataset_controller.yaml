@@ -3,7 +3,7 @@
 # metadata:
 #   labels:
 #     control-plane: controller
-#   name: fluid-system
+#   name: fluid
 ---
 apiVersion: apps/v1
 kind: Deployment
