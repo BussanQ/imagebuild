@@ -3,4 +3,4 @@ appVersion: latest
 description: A Helm chart for Kubernetes CSI backed by a SeaweedFS cluster
 name: seaweedfs-csi-driver
 type: application
-version: 0.2.2
+version: 0.2.3
