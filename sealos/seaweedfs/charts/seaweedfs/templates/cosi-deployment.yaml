@@ -9,6 +9,7 @@ metadata:
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: objectstorage-provisioner
 spec:
   replicas: {{ .Values.cosi.replicas }}
   selector:
@@ -39,6 +40,13 @@ spec:
       {{- end }}
     spec:
       restartPolicy: {{ default .Values.global.restartPolicy .Values.cosi.restartPolicy }}
+      {{- if .Values.cosi.affinity }}
+      affinity:
+        {{ tpl .Values.cosi.affinity . | nindent 8 | trim }}
+      {{- end }}
+      {{- if .Values.cosi.topologySpreadConstraints }}
+      {{- include "seaweedfs.topologySpreadConstraints" (dict "Values" .Values "component" "objectstorage-provisioner") | nindent 6 }}
+      {{- end }}
       {{- if .Values.cosi.tolerations }}
       tolerations:
         {{ tpl .Values.cosi.tolerations . | nindent 8 | trim }}
@@ -140,6 +148,10 @@ spec:
               mountPath: /usr/local/share/ca-certificates/client/
             {{- end }}
             {{ tpl .Values.cosi.extraVolumeMounts . | nindent 12 | trim }}
+          {{- with .Values.cosi.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
         - name: seaweedfs-cosi-sidecar
           image: "{{ .Values.cosi.sidecar.image }}"
           imagePullPolicy: {{ default "IfNotPresent" .Values.global.imagePullPolicy }}
@@ -153,7 +165,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/cosi
               name: socket
-          {{- with .Values.cosi.resources }}
+          {{- with .Values.cosi.sidecar.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -173,7 +185,7 @@ spec:
             {{- if .Values.cosi.existingConfigSecret }}
             secretName: {{ .Values.cosi.existingConfigSecret }}
             {{- else }}
-            secretName: seaweedfs-client-cert
+            secretName: seaweedfs-s3-secret
             {{- end }}
         {{- end }}
         {{- if .Values.global.enableSecurity }}
